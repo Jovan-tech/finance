@@ -46,12 +46,30 @@
               </li>
           </ul>
       </div>
-    </header>
-<div class="container mt-5">
-    <div class="card shadow-sm">
-        <div class="card-header bg-primary text-white">
-            <h4 class="mb-0">Laporan Jurnal Umum</h4>
-        </div>
+    </nav>
+  </header>
+  
+  <!-- Header Perusahaan dan Periode -->
+<!-- Header Laporan -->
+<div class="container-fluid">
+  <div class="text-center mb-4">
+      <h4 class="mb-1">Dadarbobar</h4>
+      <h5 class="mb-1">Jurnal Umum</h5>
+      <p class="mb-0">
+        Periode: 
+        @if(request('dari') && request('sampai'))
+            {{ \Carbon\Carbon::parse(request('dari'))->translatedFormat('d F Y') }} - {{ \Carbon\Carbon::parse(request('sampai'))->translatedFormat('d F Y') }}
+        @else
+            {{ \Carbon\Carbon::now()->translatedFormat('F Y') }}
+        @endif
+      </p>
+  </div>
+</div>
+
+  
+  <!-- Ringkasan Statistik -->
+  <div class="container-fluid mb-4">
+    <div class="row">
         <div class="card-body">
             <form method="GET" action="{{ route('laporan.jurnal') }}" class="row mb-4">
                 <div class="col-md-4">
@@ -89,11 +107,26 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="6" class="text-center">Tidak ada data jurnal untuk periode ini.</td>
+                            <td colspan="5" class="text-center">Tidak ada data jurnal untuk periode ini.</td>
                         </tr>
                         @endforelse
                     </tbody>
+                    @if($jurnal->isNotEmpty())
+                    <tfoot class="table-secondary">
+                        <tr>
+                            <th colspan="3" class="text-end">Total</th>
+                            <th class="text-end">{{ number_format($totalDebit, 0, ',', '.') }}</th>
+                            <th class="text-end">{{ number_format($totalKredit, 0, ',', '.') }}</th>
+                        </tr>
+                    </tfoot>
+                    @endif
                 </table>
+            </div>
+            
+            <!-- Footer Laporan -->
+            <div class="mt-4 text-center text-muted">
+                <p class="mb-0">Laporan ini dibuat secara otomatis oleh Sistem Akuntansi Dadarbobar</p>
+                <p class="mb-0">Dicetak pada: {{ \Carbon\Carbon::now()->format('d M Y') }}</p>
             </div>
         </div>
     </div>

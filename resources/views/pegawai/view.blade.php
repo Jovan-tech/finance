@@ -264,7 +264,7 @@
                                             <thead>
                                             <tr>
                                                 <th>Nama Pegawai</th>
-                                                <th>Nomor Pegawai</th>
+                                                <th>Nomor Telepon Pegawai</th>
                                                 <th>Email Pegawai</th>                                                
                                                 <th>Aksi</th>
                                             </tr>

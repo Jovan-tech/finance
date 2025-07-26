@@ -68,10 +68,10 @@ class TransaksiController extends Controller
 
             JurnalUmum::create([
                 'tanggal' => now(),
-                'nama_akun' => 'Pendapatan',
+                'nama_akun' => 'Penjualan',
                 'kode_akun' => 401,
                 'debit' => 0,
-                'kredit' => $totalHarga,
+                'kredit' => -$totalHarga,
             ]);
 
             DB::commit();

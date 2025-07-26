@@ -244,6 +244,37 @@
     .checkout-btn i {
         font-size: 1.4rem;
     }
+
+    .cancel-btn {
+        width: 100%;
+        padding: 1rem;
+        background: linear-gradient(135deg, #dc3545 0%, #e4606d 100%);
+        color: white;
+        border: none;
+        border-radius: 15px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.8rem;
+        margin-top: 1rem;
+    }
+    .cancel-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+    }
+
+    /* TAMBAHAN: Style untuk baris pajak */
+    .tax-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 0;
+        font-size: 1rem;
+        color: #555;
+    }
   </style>
 
   <!-- Header -->
@@ -255,10 +286,8 @@
 
   @php
     $categories = [
-      'Menu Utama' => 'Menu Utama',
+      'Makanan' => 'Makanan',
       'Minuman' => 'Minuman',
-      'Topping' => 'Topping',
-      'Menu Tambahan' => 'Menu Tambahan',
     ];
   @endphp
 
@@ -314,10 +343,23 @@
 
   <!-- Cart Section -->
   <div class="cart-container mx-3 mt-4">
-      <div class="cart-title no-print"><i class="ti ti-shopping-cart"></i> Keranjang</div>
+      <div class="cart-title no-print"><i class="ti ti-shopping-cart"></i> Pesanan</div>
       <div id="cart-items"></div>
-      <div class="cart-total mt-2"><strong>Total: Rp <span id="cart-total">0</span></strong></div>
-      <button class="checkout-btn no-print" id="checkout-btn">Checkout</button>
+      
+      <!-- Tambahan Baris Pajak -->
+      <div class="tax-row">
+          <span>Subtotal:</span>
+          <span>Rp <span id="cart-subtotal">0</span></span>
+      </div>
+      <div class="tax-row">
+          <span>PPN (10%):</span>
+          <span>Rp <span id="cart-tax">0</span></span>
+      </div>
+      <div class="cart-total mt-2"><strong>Grand Total: Rp <span id="cart-grand-total">0</span></strong></div>
+      
+      <!-- Tombol Checkout dan Cancel -->
+      <button class="checkout-btn no-print" id="checkout-btn">Beli</button>
+      <button class="cancel-btn" id="cancel-btn">Batal</button>
   </div>
 </div>
 
@@ -372,19 +414,36 @@
     .catch(() => Swal.fire('Error!', 'Gagal menyimpan transaksi.', 'error'));
   });
 
+  // Fungsi baru: Tombol Cancel Pesanan
+  document.getElementById('cancel-btn').addEventListener('click', function() {
+    cart = []; // Kosongkan keranjang
+    updateCartUI(); // Perbarui tampilan keranjang
+  });
+
+  // Fungsi updateCartUI dengan tambahan perhitungan pajak
   function updateCartUI() {
     const itemsEl = document.getElementById('cart-items');
-    const totalEl = document.getElementById('cart-total');
+    const subtotalEl = document.getElementById('cart-subtotal');
+    const taxEl = document.getElementById('cart-tax');
+    const grandTotalEl = document.getElementById('cart-grand-total');
+    
     itemsEl.innerHTML = '';
-    let total = 0;
+    let subtotal = 0;
+    
     cart.forEach(item => {
       const row = document.createElement('div');
       row.className = 'cart-item';
       row.innerHTML = `<span>${item.nama} x ${item.qty}</span><span>Rp ${item.subtotal.toLocaleString()}</span>`;
       itemsEl.appendChild(row);
-      total += item.subtotal;
+      subtotal += item.subtotal;
     });
-    totalEl.innerText = total.toLocaleString();
+    
+    const tax = Math.round(subtotal * 0.1); // PPN 10%
+    const grandTotal = subtotal + tax;
+    
+    subtotalEl.innerText = subtotal.toLocaleString();
+    taxEl.innerText = tax.toLocaleString();
+    grandTotalEl.innerText = grandTotal.toLocaleString();
   }
 </script>
 

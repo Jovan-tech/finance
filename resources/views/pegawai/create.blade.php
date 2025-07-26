@@ -170,8 +170,8 @@
 
                     <!-- Nomor Pegawai -->
                     <div class="mb-3">
-                        <label for="nomor_pegawai" class="form-label">Nomor Pegawai</label>
-                        <input class="form-control" id="nomor_pegawai" name="nomor_pegawai" type="number" placeholder="Masukkan nomor pegawai" value="{{ old('nomor_pegawai') }}" required>
+                        <label for="nomor_pegawai" class="form-label">Nomor Telepon Pegawai</label>
+                        <input class="form-control" id="nomor_pegawai" name="nomor_pegawai" type="number" placeholder="Masukkan nomor telepon pegawai" value="{{ old('nomor_pegawai') }}" required>
                     </div>
 
                     <!-- Email Pegawai -->

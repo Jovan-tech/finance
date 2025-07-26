@@ -263,7 +263,7 @@
                                         <table class="table table-bordered" id="dataTable" cellspacing="0">
                                             <thead>
                                             <tr>
-                                                <th>Kode Produk</th>
+                                                <!-- <th>Kode Produk</th> -->
                                                 <th>Nama Produk</th>
                                                 <th>Kategori</th>
                                                 <th>Harga</th>
@@ -273,7 +273,7 @@
                                             </thead>
                                             <tfoot>
                                                 <tr>
-                                                  <th>Kode Produk</th>
+                                                  <!-- <th>Kode Produk</th> -->
                                                   <th>Menu  </th>
                                                   <th>Kategori</th>
                                                   <th>Harga</th>
@@ -284,7 +284,7 @@
                                             <tbody>
                                             @forelse ($produk as $P)
                                                   <tr>
-                                                      <td>{{ $P->kode_produk }}</td>
+                                                      <!-- <td>{{ $P->kode_produk }}</td> -->
                                                       <td>{{ $P->nama_produk }}</td>
                                                       <td>{{ $P->kategori }}</td>
                                                       <td>Rp {{ number_format($P->harga, 0, ',', '.') }}</td>

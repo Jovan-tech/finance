@@ -266,7 +266,7 @@
                                                 <th>Nama Akun</th>
                                                 <th>Nomor Akun</th>
                                                 <th>Header Akun</th>                                                
-                                                <th>Aksi</th>
+                                                <!-- <th>Aksi</th> -->
                                             </tr>
                                             </thead>                                            
                                             <tbody>
@@ -275,13 +275,13 @@
                                                       <td>{{ $P->nama_akun }}</td>
                                                       <td>{{ $P->nomor_akun }}</td>
                                                       <td>{{ $P->header_akun }}</td>                                                      
-                                                        <td>                                                    
+                                                        <!-- <td>                                                    
                                                           <form action="{{ route('coa.destroy', $P->id) }}" method="POST" class="d-inline">
                                                               @csrf
                                                               @method('DELETE')
                                                               <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
                                                           </form>
-                                                      </td>
+                                                      </td> -->
                                                   </tr>
                                               @empty
                                                   <tr>

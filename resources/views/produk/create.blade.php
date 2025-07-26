@@ -246,17 +246,17 @@
                         @csrf <!-- Laravel CSRF Token -->
                 
                         <!-- Kode Produk -->
-                        <fieldset disabled>
+                        <!-- <fieldset disabled>
                             <div class="mb-3">
                                 <label for="kode_produk_tampil" class="form-label">Kode Produk</label>
                                 <input class="form-control" id="kode_produk_tampil" name="kode_produk_tampil" type="text" placeholder="Contoh: PK-001" value="{{$kode_produk}}" readonly>
                             </div>
-                        </fieldset>
+                        </fieldset> -->
                         <input type="hidden" id="kode_produk" name="kode_produk" value="{{$kode_produk}}">
                 
                         <!-- Nama Produk -->
                         <div class="mb-3">
-                            <label for="nama_produk" class="form-label">Nama Konsumsi</label>
+                            <label for="nama_produk" class="form-label">Nama Menu</label>
                             <input class="form-control" id="nama_produk" name="nama_produk" type="text" placeholder="Masukkan nama produk, contoh: Nasi Goreng Seblak" value="{{old('nama_produk')}}" required>
                         </div>
                 
@@ -265,10 +265,9 @@
                                 <label for="kategori" class="form-label">Kategori</label>
                                 <select class="form-select" id="kategori" name="kategori" required>
                                     <option value="" selected disabled>Pilih Kategori</option>
-                                    <option value="Menu Tambahan">Menu Tambahan</option>
-                                    <option value="Topping">Topping</option>    
+                                    <!-- <option value="Menu Tambahan">Menu Tambahan</option> -->
+                                    <option value="Makanan">Makanan</option>    
                                     <option value="Minuman">Minuman</option>
-                                    <option value="Menu Utama">Menu Utama</option>
                                 </select>
                             </div>                
                         <!-- Ukuran Produk -->

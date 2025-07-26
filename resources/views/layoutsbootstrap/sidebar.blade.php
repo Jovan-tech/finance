@@ -19,8 +19,10 @@
           </div>
         </div>
         <!-- Sidebar navigation-->
+        @php $role = Auth::user()->role; @endphp
         <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
           <ul id="sidebarnav">
+            @if($role === 'admin')
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">Home</span>
@@ -54,14 +56,67 @@
                 <span class="hide-menu">Coa</span>
               </a>
             </li>
-            <li class="sidebar-item">
+            <!-- <li class="sidebar-item">
               <a class="sidebar-link" href="{{ url('/pegawai') }}" aria-expanded="false">
                 <span>
                   <i class="ti ti-file-description"></i>
                 </span>
                 <span class="hide-menu">Pegawai</span>
               </a>
+            </li> -->
+            @endif
+
+            @if($role === 'pegawai')
+            <li class="nav-small-cap">
+              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+              <span class="hide-menu">Home</span>
             </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{{ url('dashboardbootstrap') }}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-layout-dashboard"></i>
+                </span>
+                <span class="hide-menu">Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-small-cap">
+              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+              <span class="hide-menu">Masterdata  </span>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{{ url('produk') }}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-layout"></i>
+                </span>
+                <span class="hide-menu">Produk
+                </span>
+              </a>
+            </li>
+            <li class="nav-small-cap">
+              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+              <span class="hide-menu">Transaksi</span>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{{ url('/transaksi/produk') }}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-shopping-cart"></i>
+                </span>
+                <span class="hide-menu">Transaksi</span>
+              </a>
+            <li class="nav-small-cap">
+              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+              <span class="hide-menu">LAPORAN</span>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{{ url('/transaksi/riwayat') }}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-shopping-cart"></i>
+                </span>
+                <span class="hide-menu">Laporan Penjualan</span>
+              </a>
+            @endif
+
+            @if($role === 'admin')
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">Transaksi</span>
@@ -102,18 +157,18 @@
             </li>
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-              <span class="hide-menu">GRAFIK</span>
+              <span class="hide-menu"></span>
             </li>
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-              <span class="hide-menu">ANALISIS DATA</span>
+              <span class="hide-menu"></span>
             </li>
             <li class="sidebar-item">
               <a class="sidebar-link" href="./icon-tabler.html" aria-expanded="false">
                 <span>
                   <i class="ti ti-mood-happy"></i>
                 </span>
-                <span class="hide-menu">Icons</span>
+                <span class="hide-menu"></span>
               </a>
             </li>
             <li class="sidebar-item">
@@ -121,10 +176,10 @@
                 <span>
                   <i class="ti ti-aperture"></i>
                 </span>
-                <span class="hide-menu">Sample Page</span>
+                <span class="hide-menu"></span>
               </a>
             </li>
-
+            @endif
           </ul>
         </nav>
         <!-- End Sidebar navigation -->

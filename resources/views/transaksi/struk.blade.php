@@ -35,7 +35,7 @@
                     <thead>
                         <tr>
                             <th>Produk</th>
-                            <th class="text-center">Qty</th>
+                            <th class="text-center">Junlah Satuan</th>
                             <th class="text-end">Harga</th>
                             <th class="text-end">Subtotal</th>
                         </tr>

@@ -250,12 +250,12 @@
                       @method('PUT')
                       <div class="form-container">
                                   <!-- Kode Produk (Read-Only) -->
-                                  <fieldset disabled>
+                                  <!-- <fieldset disabled>
                                       <div class="mb-3">
                                           <label for="kode_produk_tampil" class="form-label">Kode Produk</label>
                                           <input class="form-control" id="kode_produk_tampil" name="kode_produk_tampil" type="text" placeholder="Contoh: PK-001" value="{{ $produk->kode_produk }}" readonly>
                                       </div>
-                                  </fieldset>
+                                  </fieldset> -->
                                   <input type="hidden" id="kode_produk" name="kode_produk" value="{{ $produk->kode_produk }}">
                       
                                   <!-- Nama Produk -->
@@ -269,9 +269,8 @@
                                       <label for="kategori" class="form-label">Kategori</label>
                                       <select class="form-select" id="kategori" name="kategori" required>
                                           <option value="" disabled>Pilih Kategori</option>
-                                          <option value="Menu Tambahan" {{ $produk->kategori == 'Menu Tambahan' ? 'selected' : '' }}>Menu Tambahan</option>
-                                          <option value="Topping" {{ $produk->kategori == 'Topping' ? 'selected' : '' }}>Topping</option>
-                                          <option value="Menu Utama" {{ $produk->kategori == 'Menu Utama' ? 'selected' : '' }}>Menu Utama</option>
+                                          <!-- <option value="Menu Tambahan" {{ $produk->kategori == 'Menu Tambahan' ? 'selected' : '' }}>Menu Tambahan</option> -->
+                                          <option value="Makanan" {{ $produk->kategori == 'Makanan' ? 'selected' : '' }}>Makanan</option>
                                           <option value="Minuman" {{ $produk->kategori == 'Minuman' ? 'selected' : '' }}>Minuman</option>
                                       </select>
                                   </div>
