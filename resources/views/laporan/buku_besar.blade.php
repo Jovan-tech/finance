@@ -109,13 +109,11 @@
                             @php
                                 $kodePertama = substr($selectedAkun->kode_akun, 0, 1);
                                 $isNormalDebit = in_array($kodePertama, ['1', '5']);
-                                if (!$isNormalDebit) {
-                                    $saldoAwal = $saldoAwal * -1;
-                                }
-                                $saldo = $saldoAwal;
+                                $saldo = 0;
                             @endphp
+
                             
-                            <tr>
+                            <!-- <tr>
                                 <td>{{ \Carbon\Carbon::parse($selectedBulan)->startOfMonth()->format('d/m/Y') }}</td>
                                 <td colspan="4"><strong>Saldo awal bulan {{ \Carbon\Carbon::parse($selectedBulan)->translatedFormat('F') }}</strong></td>
                                 @if ($saldo >= 0)
@@ -125,7 +123,7 @@
                                     <td class="text-end"></td>
                                     <td class="text-end">{{ number_format(abs($saldo), 2, ',', '.') }}</td>
                                 @endif
-                            </tr> 
+                            </tr>  -->
 
                             @forelse ($jurnal as $item)
                                 @php

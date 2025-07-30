@@ -341,12 +341,10 @@
     @endif
   @endforeach
 
-  <!-- Cart Section -->
   <div class="cart-container mx-3 mt-4">
-      <div class="cart-title no-print"><i class="ti ti-shopping-cart"></i> Pesanan</div>
+      <div class="cart-title no-print"><i></i> Pesanan</div>
       <div id="cart-items"></div>
-      
-      <!-- Tambahan Baris Pajak -->
+      >
       <div class="tax-row">
           <span>Subtotal:</span>
           <span>Rp <span id="cart-subtotal">0</span></span>
@@ -371,18 +369,18 @@
     btn.addEventListener('click', () => {
       const input = btn.parentElement.querySelector('.quantity-input');
       let value = parseInt(input.value);
-      
-      if(btn.classList.contains('increment')) {
+
+      if (btn.classList.contains('increment')) {
         value = value < 10 ? value + 1 : 10;
       } else {
         value = value > 1 ? value - 1 : 1;
       }
-      
+
       input.value = value;
     });
   });
 
-  // Existing Order Logic
+  // Order Button Logic
   document.querySelectorAll('.btn-order').forEach(btn => {
     btn.addEventListener('click', () => {
       const id = btn.dataset.id;
@@ -391,59 +389,82 @@
       const qtyInput = btn.closest('.product-actions').querySelector('.quantity-input');
       const qty = parseInt(qtyInput.value);
       const existing = cart.find(i => i.id == id);
+
       if (existing) {
         existing.qty += qty;
         existing.subtotal = existing.qty * harga;
       } else {
         cart.push({ id, nama, harga, qty, subtotal: qty * harga });
       }
+
       updateCartUI();
+
       const card = btn.closest('.product-card');
-      card.classList.add('animate-add'); setTimeout(() => card.classList.remove('animate-add'), 500);
+      card.classList.add('animate-add');
+      setTimeout(() => card.classList.remove('animate-add'), 500);
     });
   });
 
-  // Existing Checkout Logic
+  // Checkout Logic
   document.getElementById('checkout-btn').addEventListener('click', () => {
-    if (!cart.length) return Swal.fire('Keranjang kosong!', 'Silakan tambahkan produk.', 'warning');
+    if (!cart.length) {
+      return Swal.fire('Keranjang kosong!', 'Silakan tambahkan produk.', 'warning');
+    }
+
     fetch('{{ route('transaksi.store') }}', {
-      method: 'POST', headers: {'Content-Type':'application/json','X-CSRF-TOKEN':document.querySelector('meta[name="csrf-token"]').getAttribute('content')},
-      body: JSON.stringify({ items: cart.map(i => ({ produk_id: i.id, jumlah: i.qty })) })
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      },
+      body: JSON.stringify({
+        items: cart.map(i => ({
+          produk_id: i.id,
+          jumlah: i.qty
+        }))
+      })
     })
-    .then(r => r.json()).then(data => { Swal.fire('Berhasil!', data.message, 'success'); cart=[]; updateCartUI(); })
-    .catch(() => Swal.fire('Error!', 'Gagal menyimpan transaksi.', 'error'));
+    .then(r => r.json())
+    .then(data => {
+      Swal.fire('Berhasil!', data.message, 'success');
+      cart = [];
+      updateCartUI();
+    })
+    .catch(() => {
+      Swal.fire('Error!', 'Gagal menyimpan transaksi.', 'error');
+    });
   });
 
-  // Fungsi baru: Tombol Cancel Pesanan
-  document.getElementById('cancel-btn').addEventListener('click', function() {
-    cart = []; // Kosongkan keranjang
-    updateCartUI(); // Perbarui tampilan keranjang
+  // Cancel Logic
+  document.getElementById('cancel-btn').addEventListener('click', function () {
+    cart = [];
+    updateCartUI();
   });
 
-  // Fungsi updateCartUI dengan tambahan perhitungan pajak
+  // Update Cart Display
   function updateCartUI() {
     const itemsEl = document.getElementById('cart-items');
     const subtotalEl = document.getElementById('cart-subtotal');
     const taxEl = document.getElementById('cart-tax');
     const grandTotalEl = document.getElementById('cart-grand-total');
-    
+
     itemsEl.innerHTML = '';
     let subtotal = 0;
-    
+
     cart.forEach(item => {
       const row = document.createElement('div');
       row.className = 'cart-item';
-      row.innerHTML = `<span>${item.nama} x ${item.qty}</span><span>Rp ${item.subtotal.toLocaleString()}</span>`;
+      row.innerHTML = `<span>${item.nama} x ${item.qty}</span><span>Rp ${item.subtotal.toLocaleString('id-ID')}</span>`;
       itemsEl.appendChild(row);
       subtotal += item.subtotal;
     });
-    
-    const tax = Math.round(subtotal * 0.1); // PPN 10%
+
+    const tax = Math.round(subtotal * 0.1);
     const grandTotal = subtotal + tax;
-    
-    subtotalEl.innerText = subtotal.toLocaleString();
-    taxEl.innerText = tax.toLocaleString();
-    grandTotalEl.innerText = grandTotal.toLocaleString();
+
+    subtotalEl.innerText = subtotal.toLocaleString('id-ID');
+    taxEl.innerText = tax.toLocaleString('id-ID');
+    grandTotalEl.innerText = grandTotal.toLocaleString('id-ID');
   }
 </script>
 

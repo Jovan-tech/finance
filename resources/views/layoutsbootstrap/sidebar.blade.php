@@ -53,7 +53,7 @@
                 <span>
                   <i class="ti ti-clipboard"></i>
                 </span>
-                <span class="hide-menu">Coa</span>
+                <span class="hide-menu">COA</span>
               </a>
             </li>
             <!-- <li class="sidebar-item">
@@ -101,7 +101,7 @@
                 <span>
                   <i class="ti ti-shopping-cart"></i>
                 </span>
-                <span class="hide-menu">Transaksi</span>
+                <span class="hide-menu">Transaksi Penjualan</span>
               </a>
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
@@ -126,7 +126,7 @@
                 <span>
                   <i class="ti ti-shopping-cart"></i>
                 </span>
-                <span class="hide-menu">Transaksi</span>
+                <span class="hide-menu">Transaksi Penjualan</span>
               </a>
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
@@ -135,7 +135,7 @@
             <li class="sidebar-item">
               <a class="sidebar-link" href="{{ url('/transaksi/riwayat') }}" aria-expanded="false">
                 <span>
-                  <i class="ti ti-shopping-cart"></i>
+                  <i class="ti ti-files"></i>
                 </span>
                 <span class="hide-menu">Laporan Penjualan</span>
               </a>

@@ -54,6 +54,12 @@ class TransaksiController extends Controller
                 $totalHarga += $subtotal;
             }
 
+            $pajak = $totalHarga * 0.10;
+            $totalDenganPajak = $totalHarga + $pajak;
+
+            // Update total harga di transaksi
+            $transaction->update(['total_harga' => $totalDenganPajak]);
+
             // Update total harga di transaksi
             $transaction->update(['total_harga' => $totalHarga]);
 
